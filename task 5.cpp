@@ -1,41 +1,43 @@
-
 #include <iostream>
 using namespace std;
 
-int insertionSort(int arr[], int size)
+void display(int arr[], int size)
 {
-    int shifts = 0;
+    for (int i = 0; i < size; i++)
+        cout << arr[i] << " ";
 
-    for (int i = 1; i < size; i++)
+    cout << endl;
+}
+
+void selectionSort(int arr[], int size)
+{
+    for (int i = 0; i < size - 1; i++)
     {
-        int key = arr[i];
-        int j = i - 1;
+        int minIndex = i;
 
-        while (j >= 0 && arr[j] > key)
+        for (int j = i + 1; j < size; j++)
         {
-            arr[j + 1] = arr[j];
-            j--;
-            shifts++;
+            if (arr[j] < arr[minIndex])
+                minIndex = j;
         }
 
-        arr[j + 1] = key;
+        int temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
     }
-
-    return shifts;
 }
 
 int main()
 {
-    int arr[5] = {23, 11, 45, 8, 30};
+    int marks[6] = {78, 45, 92, 60, 85, 33};
 
-    int shifts = insertionSort(arr, 5);
+    cout << "Before: ";
+    display(marks, 6);
 
-    cout << "Sorted: ";
+    selectionSort(marks, 6);
 
-    for (int i = 0; i < 5; i++)
-        cout << arr[i] << " ";
-
-    cout << "\nShifts: " << shifts;
+    cout << "After: ";
+    display(marks, 6);
 
     return 0;
 }
